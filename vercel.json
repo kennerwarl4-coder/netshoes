@@ -1,7 +1,3 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "rewrites": [
-    { "source": "/checkout", "destination": "/checkout.html" }
-  ]
+  "trailingSlash": false
 }
