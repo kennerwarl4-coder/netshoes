@@ -1,4 +1,7 @@
 {
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": ".",
   "trailingSlash": false,
   "rewrites": [
     { "source": "/checkout", "destination": "/checkout.html" }
