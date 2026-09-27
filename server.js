@@ -32,7 +32,8 @@ const apiHandlers = {
   '/api/create-pix': require('./api/create-pix'),
   '/api/webhook': require('./api/webhook'),
   '/api/check-status': require('./api/check-status'),
-  '/api/simulate-payment': require('./api/simulate-payment')
+  '/api/simulate-payment': require('./api/simulate-payment'),
+  '/api/track-pageview': require('./api/track-pageview')
 };
 
 async function handleApiRequest(req, res, pathname) {
