@@ -30,7 +30,7 @@ module.exports = async function handler(req, res) {
   try {
     const body = typeof req.body === 'object' && req.body !== null ? req.body : JSON.parse(req.body || '{}');
 
-    const { client, shipping, size = '41', amount = 287.90, utm = {}, fbp, fbc } = body;
+    const { client, shipping, size = '41', amount = 217.90, utm = {}, fbp, fbc } = body;
 
     const clientIp =
       req.headers['x-forwarded-for']?.split(',')[0].trim() ||
@@ -57,7 +57,7 @@ module.exports = async function handler(req, res) {
     const uniqueSuffix = crypto.randomBytes(3).toString('hex');
     const identifier = `cv_${Date.now().toString(36)}_${uniqueSuffix}`;
 
-    const numAmount = Number(parseFloat(amount).toFixed(2)) || 287.90;
+    const numAmount = Number(parseFloat(amount).toFixed(2)) || 217.90;
 
     const chargeResult = await createPixCharge({
       identifier,
