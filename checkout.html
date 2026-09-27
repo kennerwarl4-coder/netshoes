@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Finalizar compra | Netshoes</title>
+  <!-- Utmify Script -->
+  <script
+    src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+    data-utmify-prevent-subids
+    async
+    defer
+  ></script>
   <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
@@ -1639,6 +1646,35 @@
         submitBtn.disabled = true;
         submitBtnText.innerHTML = '<span class="btn-spinner"></span> Gerando cobrança Pix...';
 
+        function getCookie(name) {
+          var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+          return match ? match[2] : null;
+        }
+
+        var urlParams = new URLSearchParams(window.location.search);
+        var storedTracking = {};
+        try {
+          storedTracking = JSON.parse(sessionStorage.getItem('utm_tracking') || localStorage.getItem('utm_tracking') || '{}');
+        } catch (e) {}
+
+        var trackingData = {
+          utm_source: urlParams.get('utm_source') || storedTracking.utm_source || '',
+          utm_medium: urlParams.get('utm_medium') || storedTracking.utm_medium || '',
+          utm_campaign: urlParams.get('utm_campaign') || storedTracking.utm_campaign || '',
+          utm_content: urlParams.get('utm_content') || storedTracking.utm_content || '',
+          utm_term: urlParams.get('utm_term') || storedTracking.utm_term || '',
+          src: urlParams.get('src') || storedTracking.src || '',
+          sck: urlParams.get('sck') || storedTracking.sck || '',
+          fbclid: urlParams.get('fbclid') || storedTracking.fbclid || '',
+          fbp: getCookie('_fbp') || '',
+          fbc: getCookie('_fbc') || ''
+        };
+
+        try {
+          sessionStorage.setItem('utm_tracking', JSON.stringify(trackingData));
+          localStorage.setItem('utm_tracking', JSON.stringify(trackingData));
+        } catch (e) {}
+
         try {
           var response = await fetch('/api/create-pix', {
             method: 'POST',
@@ -1649,7 +1685,10 @@
               client: clientData,
               shipping: shippingData,
               size: size,
-              amount: 287.90
+              amount: 287.90,
+              utm: trackingData,
+              fbp: trackingData.fbp,
+              fbc: trackingData.fbc
             })
           });
 

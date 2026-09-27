@@ -3,6 +3,13 @@
  url: (removed) 
  saved date: Tue Sep 22 2026 12:20:37 GMT-0300 (Horário Padrão de Brasília)
 --><head class="vwo_loaded vwo_loaded_141"><meta charset=utf-8>
+<!-- Utmify Script -->
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -516,7 +523,13 @@ src="https://www.facebook.com/tr?id=954239554398396&ev=PageView&noscript=1"
       e.preventDefault();
       var selectedSizeEl = document.querySelector('.size-list .size-list__item .size__link.js-selected');
       var size = selectedSizeEl ? selectedSizeEl.textContent.trim() : '41';
-      window.location.href = 'checkout.html?size=' + encodeURIComponent(size);
+      function getCheckoutUrl(size) {
+      var search = window.location.search || '';
+      var params = new URLSearchParams(search);
+      params.set('size', size || '41');
+      return 'checkout.html?' + params.toString();
+    }
+    window.location.href = getCheckoutUrl(size);
     });
   }
   var addCartBtn = document.querySelector('.add-cart-button');
@@ -526,7 +539,13 @@ src="https://www.facebook.com/tr?id=954239554398396&ev=PageView&noscript=1"
       e.preventDefault();
       var selectedSizeEl = document.querySelector('.size-list .size-list__item .size__link.js-selected');
       var size = selectedSizeEl ? selectedSizeEl.textContent.trim() : '41';
-      window.location.href = 'checkout.html?size=' + encodeURIComponent(size);
+      function getCheckoutUrl(size) {
+      var search = window.location.search || '';
+      var params = new URLSearchParams(search);
+      params.set('size', size || '41');
+      return 'checkout.html?' + params.toString();
+    }
+    window.location.href = getCheckoutUrl(size);
     });
   }
 })();

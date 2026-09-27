@@ -30,7 +30,13 @@ module.exports = async function handler(req, res) {
   try {
     const body = typeof req.body === 'object' && req.body !== null ? req.body : JSON.parse(req.body || '{}');
 
-    const { client, shipping, size = '41', amount = 287.90 } = body;
+    const { client, shipping, size = '41', amount = 287.90, utm = {}, fbp, fbc } = body;
+
+    const clientIp =
+      req.headers['x-forwarded-for']?.split(',')[0].trim() ||
+      req.socket?.remoteAddress ||
+      '';
+    const userAgent = req.headers['user-agent'] || '';
 
     if (!client || !client.name || !client.email || !client.phone || (!client.cpf && !client.document)) {
       const msg = 'Dados do cliente incompletos. Informe nome, e-mail, telefone e CPF.';
@@ -71,7 +77,15 @@ module.exports = async function handler(req, res) {
       metadata: {
         size: String(size),
         shippingCity: shipping?.city || '',
-        shippingUf: shipping?.uf || ''
+        shippingUf: shipping?.uf || '',
+        utm_source: utm.utm_source || '',
+        utm_medium: utm.utm_medium || '',
+        utm_campaign: utm.utm_campaign || '',
+        utm_content: utm.utm_content || '',
+        utm_term: utm.utm_term || '',
+        src: utm.src || '',
+        sck: utm.sck || '',
+        fbclid: utm.fbclid || ''
       }
     });
 
@@ -92,7 +106,12 @@ module.exports = async function handler(req, res) {
       shipping: shipping || {},
       pix: chargeResult.pix,
       order: chargeResult.order,
-      fee: chargeResult.fee
+      fee: chargeResult.fee,
+      utm: utm || {},
+      fbp: fbp || utm.fbp || '',
+      fbc: fbc || utm.fbc || '',
+      clientIp,
+      userAgent
     });
 
     const responsePayload = {
