@@ -1,4 +1,5 @@
 const { updateOrderStatus, getOrder } = require('../lib/orders');
+const { sendMetaPurchaseEvent } = require('../lib/meta-pixel');
 
 module.exports = async function handler(req, res) {
   // CORS / methods
@@ -59,12 +60,21 @@ module.exports = async function handler(req, res) {
 
     if (newStatus && (existingOrder || targetKey)) {
       const orderIdToUpdate = existingOrder ? existingOrder.identifier : targetKey;
-      updateOrderStatus(orderIdToUpdate, newStatus, {
+      const updatedOrder = updateOrderStatus(orderIdToUpdate, newStatus, {
         webhookEvent: event,
         paidAt: tx.payedAt || (newStatus === 'PAID' ? new Date().toISOString() : null),
         lastWebhookPayload: payload
       });
       console.log(`[Webhook SigiloPay] Pedido ${orderIdToUpdate} atualizado para status: ${newStatus}`);
+
+      // If payment approved, trigger Meta Conversions API purchase event (with anti-duplication)
+      if (newStatus === 'PAID') {
+        const clientIp = req.headers['x-forwarded-for'] || req.socket?.remoteAddress;
+        const userAgent = req.headers['user-agent'];
+        sendMetaPurchaseEvent(updatedOrder, { clientIp, userAgent }).catch(err => {
+          console.warn('[Webhook] Aviso ao enviar evento para Meta CAPI:', err.message);
+        });
+      }
     } else {
       console.warn(`[Webhook SigiloPay] Pedido não encontrado para ${targetKey}`);
     }

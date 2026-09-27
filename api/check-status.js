@@ -1,4 +1,5 @@
 const { getOrder } = require('../lib/orders');
+const { sendMetaPurchaseEvent } = require('../lib/meta-pixel');
 
 module.exports = async function handler(req, res) {
   // CORS
@@ -40,6 +41,15 @@ module.exports = async function handler(req, res) {
     if (res.status) return res.status(404).json(notFoundObj);
     res.writeHead(404, { 'Content-Type': 'application/json' });
     return res.end(JSON.stringify(notFoundObj));
+  }
+
+  // If order is paid and Meta Purchase hasn't been sent yet, send it now
+  if (order.status === 'PAID' && !order.metaPurchaseSent) {
+    const clientIp = req.headers['x-forwarded-for'] || req.socket?.remoteAddress;
+    const userAgent = req.headers['user-agent'];
+    sendMetaPurchaseEvent(order, { clientIp, userAgent }).catch(err => {
+      console.warn('[check-status] Erro ao enviar purchase para Meta:', err.message);
+    });
   }
 
   const responsePayload = {

@@ -1,4 +1,5 @@
 const { updateOrderStatus, getOrder } = require('../lib/orders');
+const { sendMetaPurchaseEvent } = require('../lib/meta-pixel');
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -33,9 +34,16 @@ module.exports = async function handler(req, res) {
     return res.end(JSON.stringify(err));
   }
 
-  updateOrderStatus(order.identifier, 'PAID', {
+  const updatedOrder = updateOrderStatus(order.identifier, 'PAID', {
     paidAt: new Date().toISOString(),
     simulation: true
+  });
+
+  // Trigger Meta CAPI purchase event with anti-duplication
+  const clientIp = req.headers['x-forwarded-for'] || req.socket?.remoteAddress;
+  const userAgent = req.headers['user-agent'];
+  sendMetaPurchaseEvent(updatedOrder, { clientIp, userAgent }).catch(metaErr => {
+    console.warn('[simulate-payment] Meta Purchase error:', metaErr.message);
   });
 
   const successPayload = {

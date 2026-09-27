@@ -4,6 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Finalizar compra | Netshoes</title>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '954239554398396');
+  fbq('track', 'PageView');
+  fbq('track', 'InitiateCheckout', {
+    content_name: 'Tênis Nike Court Vision Low Next Nature Masculino - Preto',
+    content_category: 'Calçados > Tênis',
+    content_ids: ['nike-court-vision-low-next-nature'],
+    content_type: 'product',
+    value: 287.90,
+    currency: 'BRL',
+    num_items: 1
+  });
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=954239554398396&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
   <link rel="icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABMLAAATCwAAAAAAAAAAAAD/AIL//wCC//8Agv//AIL//wCC//8Agf//AID//wCA//8AgP//AID//wCA//8AgP//AID//wCA//8AgP//AID//wCC//8Agv//AIL//wCC//8Agv//AIH//wCA//8AgP//AID//wCA//8AgP//AID//wCA//8AgP//AID//wCA//8Agv//AIL//wCC//8Agv//AIL//wCB//8AgP//AID//wCA//8Af///AID//wCA//8AgP//AID//wCA//8AgP//AIL//wCC//8Dg///BYP//wOC//8Agf//AIH//wCA//8Gg///DYf//wWC//8AgP//AIH//wCB//8Agf//AIH//wCC//8Agf//R6X//5vO//9xuv//CYb//wCB//8smP//mMz//7fc//+QyP//LJf//wCB//8Agv//AIL//wCC//8Agv//AID//1qt///5/P//1ev//x6R//8Jhv//pNL//////////////////7nd//8bj///AIH//wCC//8Agv//AIL//wCB//80mv//5/P//+/3//89n///I5P//9zu////////xuP//97v///6/f//ZLP//wCB//8Agv//AIL//wCC//8Agf//GI7//8rl///9/v//YrH//0Cg///v+P//+vz//2Wz//+Syf///////6LR//8Hhf//AIL//wCC//8Agv//AIL//weF//+j0v///////5HJ//9ls///+vz//+/4//9AoP//Y7L///3+///K5f//F43//wCB//8Agv//AIL//wCC//8Agf//ZbP///r9///c7v//xOL////////c7v//JJP//z2f///v9///5/P//zOa//8Agf//AIL//wCC//8Agv//AIH//x2Q//+73v//////////////////pdP//wmG//8fkf//1uv///n8//9Zrf//AID//wCC//8Agv//AIL//wCC//8Agf//Lpj//5TK//+63f//ms7//y6Z//8Agf//CYb//3W7//+f0P//SKX//wCB//8Agv//AIL//wCC//8Agv//AIL//wCB//8FhP//Don//weF//8Agv//AIL//wCC//8Dg///BYT//wOD//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCB//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==" type="image/x-icon">
   <link rel="stylesheet" href="assets/fonts.css">
   <style>
@@ -1793,6 +1819,31 @@
           (shippingData.complement ? ' (' + shippingData.complement + ')' : '') + ' - ' +
           (shippingData.neighborhood || '') + ', ' + (shippingData.city || '') + '/' + (shippingData.uf || '') +
           ' - CEP ' + (shippingData.cep || '');
+
+        // DISPARO DO PIXEL META (PURCHASE) COM PROTEÇÃO ANTI-DUPLICIDADE
+        try {
+          var purchaseKey = 'meta_purchase_sent_' + displayId;
+          if (!localStorage.getItem(purchaseKey) && typeof fbq === 'function') {
+            localStorage.setItem(purchaseKey, 'true');
+            fbq('track', 'Purchase', {
+              content_name: 'Tênis Nike Court Vision Low Next Nature Masculino - Preto',
+              content_category: 'Calçados > Tênis',
+              content_ids: ['nike-court-vision-low-next-nature'],
+              content_type: 'product',
+              value: 287.90,
+              currency: 'BRL',
+              num_items: 1,
+              order_id: displayId
+            }, {
+              eventID: displayId // Mesmo ID enviado pelo servidor via CAPI para deduplicação automática da Meta
+            });
+            console.log('[Meta Pixel] Evento Purchase disparado com sucesso! eventID:', displayId);
+          } else {
+            console.log('[Meta Pixel] Evento Purchase já havia sido disparado para este pedido. Duplicação evitada.');
+          }
+        } catch (fbErr) {
+          console.warn('[Meta Pixel] Erro ao disparar Purchase:', fbErr);
+        }
 
         if (navigator.vibrate) {
           try { navigator.vibrate([100, 50, 100]); } catch (v) {}
